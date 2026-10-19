@@ -54,3 +54,12 @@ double calculateMax(const std::vector<double>& values){
         }
         return max_data;
     }
+
+double calculateRange(const std::vector<double>& values){
+        if (values.empty()){
+            throw std::invalid_argument("The vector is empty. Cannot calculate range.");
+        }
+        double min_data = calculateMin(values);
+        double max_data = calculateMax(values);
+        return max_data - min_data;
+    }
