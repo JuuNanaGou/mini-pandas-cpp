@@ -12,14 +12,14 @@ int main(){
     std::size_t sorted_size = sorted_data.size();
     double mean = sum / data.size();
     double median = 0.0;
-    double max = data[0];
-    double min = data[0];
+    double max_data = data[0];
+    double min_data = data[0];
     for (double element : data){
-        if (element > max){
-            max = element;
+        if (element > max_data){
+            max_data = element;
         }
-        if (element < min){
-            min = element;
+        if (element < min_data){
+            min_data = element;
         }
     }
     std::sort(sorted_data.begin(), sorted_data.end());
@@ -31,7 +31,7 @@ int main(){
     std::cout << "Count: " << data.size() << "\n";
     std::cout << "Mean: " << mean << "\n";
     std::cout << "Median: " << median << "\n";
-    std::cout << "Max: " << max << "\n";
-    std::cout << "Min: " << min << "\n";
+    std::cout << "Max: " << max_data << "\n";
+    std::cout << "Min: " << min_data << "\n";
     return 0;
 }
