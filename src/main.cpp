@@ -4,17 +4,22 @@
 #include <string>
 #include "dataset.h"
 #include "csv.h"
+#include "table.h"
+#include <vector>
 
 int main(){
     try {
-        Dataset math = loadColumn("data/grades.csv", 1);
-        std::cout << "Dataset: " << math.name() << "\n";
-        std::cout << "Count: " << math.size() << "\n";
-        std::cout << "Mean: " << math.mean() << "\n";
-        std::cout << "Median: " << math.median() << "\n";
-        std::cout << "Min: " << math.min() << "\n";
-        std::cout << "Max: " << math.max() << "\n";
-        std::cout << "Range: " << math.range() << "\n";
+        Table grades("data/grades.csv");
+        std::cout << "Rows: " << grades.rowCount() << "\n";
+
+        std::vector<std::string> names = grades.textColumn("name");
+        Dataset mathScores = grades.numericColumn("math");
+        Dataset scienceScores = grades.numericColumn("science");
+
+        std::cout << names[0] << "'s math score: " << grades.cell(0, "math") << "\n";
+        std::cout << names[0] << "'s science score: " << grades.cell(0, "science") << "\n";
+        std::cout << "Math mean: " << mathScores.mean() << "\n";
+        std::cout << "Science mean: " << scienceScores.mean() << "\n";
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << "\n";
         return 1;
