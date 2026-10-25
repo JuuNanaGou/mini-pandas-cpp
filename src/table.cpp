@@ -63,7 +63,13 @@ Dataset Table::numericColumn(const std::string& column) const{
     std::size_t colIndex = columnIndex(column);
     std::vector<double> values;
     for(const auto& row : rows_){
+        const std::string& text = row[colIndex];
         try{
+            std::size_t used = 0;
+            double value = std::stod(text, &used);
+            if(used != text.size()){
+                throw std::invalid_argument("trailing characters");
+            }
             values.push_back(std::stod(row[colIndex]));
         } catch(const std::invalid_argument&){
             throw std::runtime_error("Non-numeric value in column: " + column);
