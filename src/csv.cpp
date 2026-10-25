@@ -25,7 +25,9 @@ std::vector<std::string> splitLine(const std::string& line) {
     while (std::getline(ss, cell, ',')) {
         cells.push_back(trim(cell));
     }
-
+    if(!line.empty() && line.back() == ',') {
+        cells.push_back("");
+    }
     return cells;
 }
 
