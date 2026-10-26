@@ -5,21 +5,20 @@
 #include "dataset.h"
 #include "csv.h"
 #include "table.h"
+#include "statistics.h"
 #include <vector>
 
 int main(){
+    std::vector<double> data = {2.0, 4.0, 4.0, 4.0, 5.0, 5.0, 7.0, 9.0};
+    std::cout << "Population Variance: " << calculatePopulationVariance(data) << "\n";
+    std::cout << "Sample Variance: " << calculateSampleVariance(data) << "\n";
+    std::cout << "Population Standard Deviation: " << calculatePopulationStdDev(data) << "\n";
+    std::cout << "Sample Standard Deviation: " << calculateSampleStdDev(data) << "\n";
+
+    std::vector<double> single_data = {5.0};
+    std::cout << "Population Variance (single element): " << calculatePopulationVariance(single_data) << "\n";
     try {
-        Table grades("data/grades.csv");
-        std::cout << "Rows: " << grades.rowCount() << "\n";
-
-        std::vector<std::string> names = grades.textColumn("name");
-        Dataset mathScores = grades.numericColumn("math");
-        Dataset scienceScores = grades.numericColumn("science");
-
-        std::cout << names[0] << "'s math score: " << grades.cell(0, "math") << "\n";
-        std::cout << names[0] << "'s science score: " << grades.cell(0, "science") << "\n";
-        std::cout << "Math mean: " << mathScores.mean() << "\n";
-        std::cout << "Science mean: " << scienceScores.mean() << "\n";
+        std::cout << "Sample Variance (single element): " << calculateSampleVariance(single_data) << "\n";
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << "\n";
         return 1;
